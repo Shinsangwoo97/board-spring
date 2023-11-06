@@ -1,7 +1,7 @@
 package com.board.springboot.board.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +23,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long id;
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, name = "category")
     private Category category;
     @Column(nullable = false, name = "user_name")

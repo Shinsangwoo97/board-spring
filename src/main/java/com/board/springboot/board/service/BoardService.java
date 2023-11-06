@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import static com.board.springboot.board.model.Category.*;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -29,6 +31,10 @@ public class BoardService {
         // 유효성 검사
         if(!password.equals(passwoardCheck)){
             throw new CustomException(ErrorCode.PASSWORD_CHECK, "");
+        }
+        // TODO: (게시물 생성) enum추가 될떄마다 여기 추가해줘야하니 category 수정시 신경안써도되게 바꿔줘야함!!
+        if(!(category == JAVA || category == JAVASCRIPT || category == DATABASE)){
+            throw  new CustomException(ErrorCode.CATEGORY_NOT_FOUND,"");
         }
         password = passwordEncoder.encode(password);
         Board board = new Board(category, username, password, title, content);
