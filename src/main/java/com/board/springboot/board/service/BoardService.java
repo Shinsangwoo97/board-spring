@@ -1,6 +1,7 @@
 package com.board.springboot.board.service;
 
 import com.board.springboot.board.dto.requestDto.CreateBoardRequestDto;
+import com.board.springboot.board.dto.responseDto.BoardListResponseDto;
 import com.board.springboot.board.model.Board;
 import com.board.springboot.board.model.Category;
 import com.board.springboot.board.repository.BoardRepository;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.board.springboot.board.model.Category.*;
 
@@ -41,5 +45,15 @@ public class BoardService {
         boardRepository.save(board);
 
         return new ResponseEntity("게시물 생성완료", HttpStatus.OK);
+    }
+
+    public List<BoardListResponseDto> getBoardList() {
+        List<Board> boardList = boardRepository.findAll();
+        List<BoardListResponseDto> boardListResponseDtos = new ArrayList<>();
+        for (Board board : boardList){
+            BoardListResponseDto boardListResponseDto = new BoardListResponseDto(board);
+            boardListResponseDtos.add(boardListResponseDto);
+        }
+        return boardListResponseDtos;
     }
 }
