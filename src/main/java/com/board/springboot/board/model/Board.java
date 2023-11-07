@@ -1,7 +1,6 @@
 package com.board.springboot.board.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATED user SET deleted_at = NOW() where id=?")
+@SQLDelete(sql = "UPDATE board SET deleted_at = NOW() where board_id=?;")
 @Where(clause = "deleted_at is NULL")
 public class Board {
     @Id

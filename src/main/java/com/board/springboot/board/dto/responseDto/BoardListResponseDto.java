@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 @Getter
 public class BoardListResponseDto {
+    private Long id;
     private Category category;
     private String title;
     private String username;
@@ -16,6 +17,7 @@ public class BoardListResponseDto {
     private Timestamp updatedAt;
 
     public BoardListResponseDto(Board board){
+        this.id = board.getId();
         this.category = board.getCategory();
         this.title = board.getTitle();
         this.username = board.getUsername();
